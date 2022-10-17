@@ -17,6 +17,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function repeater(str, options) {
   let res = [];
+  if(typeof str !== "string") {
+    str = String(str);
+  }
+  if(typeof options.addition !== "string") {
+    options.addition = String(options.addition);
+  }
+  if(typeof options.addition === "object") {
+    options.addition[Symbol.toPrimitive]('string');
+  }
+
   if('repeatTimes' in options) {
     for(let i = 1; i <= options.repeatTimes; i++) {
       res.push(str);
