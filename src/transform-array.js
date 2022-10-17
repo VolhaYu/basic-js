@@ -18,13 +18,22 @@ function transform(arr) {
     throw new Error(`'arr' parameter must be an instance of the Array!`);
   }
   // console.log(arr);
-  let newArr = arr;
+  let newArr = [];
+  newArr.push(arr);
+  newArr = newArr.flat();
   let discardN = '--discard-next';
   let discardP = '--discard-prev';
   let doubleN = '--double-next';
   let doubleP = '--double-prev';
 
   for (let i = 0; i < newArr.length; i++) {
+    if(newArr[0] === discardP || newArr[0] === doubleP) {
+      newArr.splice(0, 1); 
+    }
+    if(newArr.length-1 === discardN || newArr.length-1 === doubleN) {
+      newArr.splice(newArr.length-1, 1); 
+    }
+
     if( newArr.includes(discardN) && newArr.includes(discardP)) {
       console.log(( newArr.includes(discardN) && newArr.includes(discardP)))
         let ind = newArr.indexOf(discardP);
